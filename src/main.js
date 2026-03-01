@@ -20,8 +20,6 @@ form.addEventListener('submit', event => {
 
   const query = document.querySelector('[name="search-text"]').value.trim();
 
-  console.log(query);
-
   getImagesByQuery(query)
     .then(hits => {
       createGallery(hits);
