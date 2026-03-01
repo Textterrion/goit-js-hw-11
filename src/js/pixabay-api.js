@@ -8,25 +8,16 @@ export default function getImagesByQuery(query) {
   const params = new URLSearchParams({
     key: '51578655-789f059cc57625b159c2f433b',
     q: query,
-    image_type: 'all',
+    image_type: 'photo',
     per_page: 9,
     orientation: 'horizontal',
     safesearch: true,
   });
-  const api = 'https://pixabay.com/api/';
+  const API = 'https://pixabay.com/api/';
 
-  return axios(`${api}?${params}`)
+  return axios(`${API}?${params}`)
     .then(response => {
       const { hits } = response.data;
-      if (hits.length === 0) {
-        iziToast.error({
-          title: 'Error',
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-          position: 'topRight',
-        });
-        return [];
-      }
       return hits;
     })
     .catch(error => {

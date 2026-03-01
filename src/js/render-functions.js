@@ -38,6 +38,7 @@ export function createGallery(images) {
               <p class="info-item">
                 <b>Downloads</b> ${downloads}
               </p>
+            </div>
           </li>`;
       }
     )
@@ -68,4 +69,10 @@ export function hideLoader() {
   if (loader) {
     loader.classList.add('hidden');
   }
+}
+
+export function notFound(query) {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML =
+    `<p class="not-found">No results found for "${query}". Please try again.</p>`;
 }

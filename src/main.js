@@ -7,6 +7,7 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
+  notFound,
 } from './js/render-functions.js';
 import getImagesByQuery from './js/pixabay-api';
 
@@ -20,9 +21,24 @@ form.addEventListener('submit', event => {
 
   const query = document.querySelector('[name="search-text"]').value.trim();
 
+  if (query === '') {
+    iziToast.warning({
+      title: 'Warning',
+      message: 'Please enter a search query.',
+      position: 'topRight',
+    });
+    hideLoader();
+    return;
+  }
+
   getImagesByQuery(query)
     .then(hits => {
-      createGallery(hits);
+      if (hits.length === 0) {
+        notFound(query);
+        return;
+      }
+        createGallery(hits);
+      
     })
 
     .catch(error => {
